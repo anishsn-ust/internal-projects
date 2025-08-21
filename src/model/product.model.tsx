@@ -1,6 +1,9 @@
 export interface ProductVO  {
     id: number;
-    rating: string;
+    rating: number;
     title: string;
     price: number;
+    thumbnail: string;
+    quantity: number;
+    total: number;
 }

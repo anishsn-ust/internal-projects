@@ -1,11 +1,11 @@
-import './App.css'
-import { Product } from './components/Product/Product'
+import './App.css';
+import { ProductCart } from './components/ProductCart/ProductCart'
 
 function App() {
 
   return (
     <>
-      <Product></Product>
+      <ProductCart></ProductCart>
     </>
   )
 }

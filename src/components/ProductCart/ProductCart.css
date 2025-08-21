@@ -1,16 +1,6 @@
-.container .cart-badge {
-    position: fixed;
-    top:0;
-    background-color: #ccc;
-    height:40px;
-    width:100%;
-}
-.container .cart-badge button{
-    width:20px;
-    border-radius: 8px;
-    color: white;
-    padding:0px;
-    background-color: rgb(235, 67, 67);
-   
+.container {
+    display: flex;
+    flex-direction: row;
+    gap:20;
 }
  
