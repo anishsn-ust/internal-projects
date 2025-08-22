@@ -6,4 +6,10 @@ export interface ProductVO  {
     thumbnail: string;
     quantity: number;
     total: number;
+    discountPercentage: number;
+    discountedTotal: number;
+    taxPercentage:number;
+    shippingCharge:number;
+    payableAmount:number;
+
 }

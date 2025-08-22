@@ -10,14 +10,22 @@ export const ProductCart:React.FC = ()=> {
     let [cartItemCount, setCartItemCount] = useState<number>(0);
     let [cartTotalPrice, setCartTotalPrice]= useState<number>(0);
 
+    const calculateCartTotal = (product: ProductVO)=>(product.discountedTotal + (product.discountedTotal * (product.taxPercentage/100) + product.shippingCharge));
+    
     useEffect(()=>{
         const fetchCartDetails = async()=> {
                     try{
                         const response = await fetch('https://dummyjson.com/carts/1');
                         const data= await response.json();
+                        data.products.forEach((product:ProductVO) => {
+                            product.taxPercentage = 10;
+                            product.shippingCharge = 25;
+                            product.payableAmount = calculateCartTotal(product);
+                            cartTotalPrice = cartTotalPrice +   product.payableAmount;
+                        })
                         setCartItems(data.products);
                         setCartItemCount(data.totalQuantity);
-                        setCartTotalPrice(data.total);
+                        setCartTotalPrice(cartTotalPrice);
                     }
                     catch(error){
                         console.log("error", error)
@@ -28,28 +36,13 @@ export const ProductCart:React.FC = ()=> {
         
     },[]);
 
-    const manageQtyPrice = (changedQty: number,productPrice: number)=> {
-      const subtotalPrice = cartTotalPrice + (changedQty * productPrice);
-      const totalQuantity = cartItemCount + changedQty;
-      setCartTotalPrice(subtotalPrice);
-      setCartItemCount(totalQuantity)
-    }
-    const removeCartItem = (productId: number,quantityToRemove:number,totalPriceToReduce: number) =>  {
-      const cartItemsAfterRemove = cartItems.filter(product=>product.id!==productId);
-      setCartItems(cartItemsAfterRemove);
-      const subtotalPrice = cartTotalPrice - totalPriceToReduce;
-      const totalQuantity = cartItemCount - quantityToRemove;
-      setCartTotalPrice(subtotalPrice);
-      setCartItemCount(totalQuantity);
-      
-    }
 
     return (
         <div className='container'>
            <div className='cart-item-container'>
             {
               cartItems.map((cartItem,index)=> (
-                <ProductCartItem key={`cart-item-${index}`} item={cartItem} manageQtyPrice={manageQtyPrice} removeCartItem={removeCartItem}></ProductCartItem>)
+                <ProductCartItem key={`cart-item-${index}`} item={cartItem} ></ProductCartItem>)
             )}
             </div>
            <CartSummary totalPrice={cartTotalPrice} totalQuantity={cartItemCount}></CartSummary>

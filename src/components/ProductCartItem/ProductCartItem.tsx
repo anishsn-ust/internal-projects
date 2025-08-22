@@ -4,29 +4,9 @@ import "./ProductCartItem.css";
 
 type Props = {
     item: ProductVO,
-    manageQtyPrice:(changedQty: number,productPrice: number)=>void
-    removeCartItem:(productId: number,quantityToRemove:number,totalPriceToReduce: number)=>void
 }
 
-export const ProductCartItem:React.FC<Props> = ({item, manageQtyPrice, removeCartItem})=> {
-
-    let [quantityCount, setQuantityCount] = useState<number>(0);
-    let [totalItemPrice, setTotalItemPrice] = useState<number>(0);
-    useEffect(()=>{
-        setQuantityCount(item.quantity);
-        setTotalItemPrice(item.total);
-
-    },[item.quantity]);
-    const handleManageOtyPrice = (changedQty: number, productPrice: number) => {
-        quantityCount = quantityCount + changedQty;
-        totalItemPrice = totalItemPrice + (changedQty * productPrice);
-        setQuantityCount(quantityCount);
-        setTotalItemPrice(totalItemPrice);
-        manageQtyPrice(changedQty,productPrice);
-    }
-   const handleRemoveCartItem = (productId:number)=> {
-     removeCartItem(productId,quantityCount,totalItemPrice);
-   }
+export const ProductCartItem:React.FC<Props> = ({item})=> {
 
     return (
         <div className='cart-item'  key={`cart-item-${item.id}`}>
@@ -39,19 +19,15 @@ export const ProductCartItem:React.FC<Props> = ({item, manageQtyPrice, removeCar
                 <p data-testid={`price-${item.id}`}><b>Price:</b> {item.price}</p>
             </div>
             <div  className='item-quantity'>
-                    <button data-testid={`increase-${item.id}`}key={`increase-${item.id}`} onClick={()=>handleManageOtyPrice(1,item.price)}>+</button>
-                    <br></br>
-                    <p data-testid={`quantity-${item.id}`}>{quantityCount}</p>
-                    <br></br>
-                    <button data-testid={`decrease-${item.id}`} disabled={quantityCount===1} key={`decrease-${item.id}`} onClick={()=>handleManageOtyPrice(-1,item.price)}>-</button>
+                    <p data-testid={`quantity-${item.id}`}>{item.quantity}</p>
             </div>
             <div  className='item-price'>
-                <p  data-testid={`total-price-${item.id}`} key={`total-price-${item.id}`}>{totalItemPrice}</p>
-                <br></br><br></br><br></br>
-                <button data-testid={`remove-item-${item.id}`} key={`remove-item-${item.id}`} onClick={()=>handleRemoveCartItem(item.id)}>Remove</button>
+                <p  key={`total-price-${item.id}`}><b>Total Price </b><span data-testid={`total-price-${item.id}`}>{item.total}</span></p>
+                <p  key={`total-price-${item.id}`}><b>Discount Price </b><span data-testid={`discount-price-${item.id}`}>{(item.discountPercentage * item.total).toFixed(2)}</span></p>
+                <p  key={`tax-price-${item.id}`}><b>Tax Price({item.taxPercentage}%) </b><span data-testid={`tax-price-${item.id}`}>{item.discountedTotal * (item.taxPercentage/100)}</span></p>
+                <p  key={`shipping-charge-${item.id}`}><b>Shipping Charge </b><span data-testid={`shipping-charge-${item.id}`}>{item.shippingCharge}</span></p>
+                <p  key={`payable-charge-${item.id}`}><b>Payable Amount </b><span  data-testid={`payable-charge-${item.id}`}>{item.payableAmount}</span></p>
             </div>
-                 
-               
           
         </div>);
     

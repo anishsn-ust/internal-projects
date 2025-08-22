@@ -16,85 +16,30 @@ describe('Product Cart page with quantity management', () => {
         
   
   
-   it('check increment quantity and check change of itemPrice & total price', async() => {
+   it('check product itemPrice & total price & shiiping charge', async() => {
      render(<ProductCart />)
       waitFor(()=> {
           const cartItemQuantity= screen.getByTestId('quantity-168');
         expect(cartItemQuantity).toHaveTextContent("3");
         const cartItemPrice= screen.getByTestId('price-168');
         expect(cartItemPrice).toHaveTextContent("32999.99");
-        const cartItemTotal= screen.getByTestId('total-price-168');
-        expect(cartItemTotal).toHaveTextContent("98999.97");
+        const cartItemDiscount= screen.getByTestId('discount-price-168');
+        expect(cartItemDiscount).toHaveTextContent("325609.60");
+        const cartItemTax= screen.getByTestId('tax-price-168');
+        expect(cartItemTax).toHaveTextContent("8574.387");
+        const cartItemShipping= screen.getByTestId('shipping-charge-168');
+        expect(cartItemShipping).toHaveTextContent("25");
+        const cartPayableAmount= screen.getByTestId('payable-charge-168');
+        expect(cartPayableAmount).toHaveTextContent("94343.257");
+
         const totalPrice= screen.getByTestId('total-price');
-        expect(totalPrice).toHaveTextContent("103774.85");
+        expect(totalPrice).toHaveTextContent("197510.62");
         const totalQuantity= screen.getByTestId('total-quantity');
         expect(totalQuantity).toHaveTextContent("15");
        
-  
-        const incrementButton = screen.getByTestId('increase-168');
-        fireEvent.click(incrementButton);
-        const cartItemQuantityAfter= screen.getByTestId('quantity-168');
-        expect(cartItemQuantityAfter).toHaveTextContent("4");
-         const cartItemPriceAfter= screen.getByTestId('price-168');
-        expect(cartItemPriceAfter).toHaveTextContent("32999.99");
-        const cartItemTotalAfter= screen.getByTestId('total-price-168');
-        expect(cartItemTotalAfter).toHaveTextContent("131999.96");
-        const totalPriceAfter= screen.getByTestId('total-price');
-        expect(totalPriceAfter).toHaveTextContent("1,36,773.85");
-        const totalQuantityAfter= screen.getByTestId('total-quantity');
-        expect(totalQuantityAfter).toHaveTextContent("16");
-        });
+      });
        
    });
    
-   it('check decerement quantity and check change of itemPrice & total price', async() => {
-     render(<ProductCart />)
-      waitFor(()=> {
-        const cartItemQuantity= screen.getByTestId('quantity-168');
-        expect(cartItemQuantity).toHaveTextContent("3");
-        const cartItemPrice= screen.getByTestId('price-168');
-        expect(cartItemPrice).toHaveTextContent("32999.99");
-        const cartItemTotal= screen.getByTestId('total-price-168');
-        expect(cartItemTotal).toHaveTextContent("98999.97");
-        const totalPrice= screen.getByTestId('total-price');
-        expect(totalPrice).toHaveTextContent("103774.85");
-        const totalQuantity= screen.getByTestId('total-quantity');
-        expect(totalQuantity).toHaveTextContent("15");
-       
-   
-        const incrementButton = screen.getByTestId('decrement-168');
-        fireEvent.click(incrementButton);
-        const cartItemQuantityAfter= screen.getByTestId('quantity-168');
-        expect(cartItemQuantityAfter).toHaveTextContent("2");
-         const cartItemPriceAfter= screen.getByTestId('price-168');
-        expect(cartItemPriceAfter).toHaveTextContent("32999.99");
-        const cartItemTotalAfter= screen.getByTestId('total-price-168');
-        expect(cartItemTotalAfter).toHaveTextContent("131999.96");
-        const totalPriceAfter= screen.getByTestId('total-price');
-        expect(totalPriceAfter).toHaveTextContent("136,773.85");
-        const totalQuantityAfter= screen.getByTestId('total-quantity');
-        expect(totalQuantityAfter).toHaveTextContent("16");
-      } )    
-   })
- it('check remove cart item and check change of itemPrice & total price', async() => {
-    render(<ProductCart />)
-      waitFor(()=> {
-        const cartItemQuantity= screen.getByTestId('quantity-168');
-        expect(cartItemQuantity).toHaveTextContent("3");
-        const cartItemPrice= screen.getByTestId('price-168');
-        expect(cartItemPrice).toHaveTextContent("32999.99");
-        const cartItemTotal= screen.getByTestId('total-price-168');
-        expect(cartItemTotal).toHaveTextContent("98999.97");
-        const totalPrice= screen.getByTestId('total-price');
-        expect(totalPrice).toHaveTextContent("103774.85");
-        const totalQuantity= screen.getByTestId('total-quantity');
-        expect(totalQuantity).toHaveTextContent("15");
-         const incrementButton = screen.getByTestId(' remove-item-168');
-        fireEvent.click(incrementButton);
-        const cartItemQuantityAfter= screen.getByTestId('quantity-168');
-        expect(cartItemQuantityAfter).not.toBeInTheDocument();
-       
-      });
- });
 
 })
