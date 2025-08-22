@@ -92,7 +92,7 @@ describe('Product Cart page with quantity management', () => {
          const incrementButton = screen.getByTestId(' remove-item-168');
         fireEvent.click(incrementButton);
         const cartItemQuantityAfter= screen.getByTestId('quantity-168');
-        expect(cartItemQuantity).not.toBeInTheDocument();
+        expect(cartItemQuantityAfter).not.toBeInTheDocument();
        
       });
  });
