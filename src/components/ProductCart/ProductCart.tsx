@@ -32,10 +32,7 @@ export const ProductCart:React.FC = ()=> {
                     }
                 }
                 fetchCartDetails();
-               
-        
     },[]);
-
 
     return (
         <div className='container'>
