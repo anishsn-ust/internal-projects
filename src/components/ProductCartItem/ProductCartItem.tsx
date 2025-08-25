@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import type { ProductVO } from '../../model/product.model';
 import "./ProductCartItem.css";
 
