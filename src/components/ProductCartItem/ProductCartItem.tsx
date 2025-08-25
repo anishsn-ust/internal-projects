@@ -7,7 +7,6 @@ type Props = {
 }
 
 export const ProductCartItem:React.FC<Props> = ({item})=> {
-
     return (
         <div className='cart-item'  key={`cart-item-${item.id}`}>
             <div className='item-image'>
@@ -27,7 +26,6 @@ export const ProductCartItem:React.FC<Props> = ({item})=> {
                 <p  key={`shipping-charge-${item.id}`}><b>Shipping Charge </b><span data-testid={`shipping-charge-${item.id}`}>{item.shippingCharge}</span></p>
                 <p  key={`payable-charge-${item.id}`}><b>Payable Amount </b><span  data-testid={`payable-charge-${item.id}`}>{item.payableAmount}</span></p>
             </div>
-          
         </div>);
     
 }
