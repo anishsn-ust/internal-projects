@@ -1,11 +1,11 @@
 import './App.css'
-import { Product } from './components/Product/Product'
+import { Quiz } from './components/Quiz/Quiz'
 
 function App() {
 
   return (
     <>
-      <Product></Product>
+      <Quiz></Quiz>
     </>
   )
 }

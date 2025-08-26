@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { Product } from './Product'
+import { Product } from './Quiz'
 
 describe('Product page with add to cart', () => {
     beforeEach(() => {
